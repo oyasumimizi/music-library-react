@@ -1,37 +1,26 @@
-"use strict";
+import logo from './logo.svg';
+import './App.css';
+import MusicList from './MusicList.js';
 
-function apiPull() {
-
-
-    $.ajax({
-        url: "http://www.devcodecampmusiclibrary.com/api/music",
-        dataType: "json",
-        type: "get",
-        success: function (data, textStatus, jQxhr) {
-            buildTable(data);
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        },
-    })
+function App() {
+  return (
+    <div className="App">
+    <MusicList/>
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
-
-function buildTable(data) {
-    let musicArray = "";
-    $.each(data, function(index, value){
-        let musicRow = 
-            "<tr>"+
-                "<td>"+value.id+"</td>"+
-                "<td>"+value.title+"</td>"+
-                "<td>"+value.album+"</td>"+
-                "<td>"+value.artist+"</td>"+
-                "<td>"+value.genre+"</td>"+
-                "<td>"+value.releaseDate+"</td>"+
-            "</tr>";
-        $("#tabledata").append(
-            musicRow
-        );
-    });
-}
-
-apiPull();
+export default App;
