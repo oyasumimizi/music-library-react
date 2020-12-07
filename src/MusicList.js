@@ -7,7 +7,6 @@ export default class MusicList extends React.Component {
     music: []
   }
 
-
   componentDidMount() {
     axios.get(`http://www.devcodecampmusiclibrary.com/api/music`)
       .then(res => {
@@ -36,6 +35,8 @@ export default class MusicList extends React.Component {
       )
     });
   }
+
+  
   render() {
     let musicTable = this.renderTableData();
         return(
@@ -50,7 +51,13 @@ export default class MusicList extends React.Component {
            <tbody>
           {musicTable}
            </tbody>
-        </table>
-        )
+           {/* <div>
+      {musicTable.filter(musicTable => musicTable.includes('')).map(filteredMusicTable => (
+        <li>
+          {filteredMusicTable}
+        </li>
+      ))}
+    </div> */}
+        </table>)
 }
 }
