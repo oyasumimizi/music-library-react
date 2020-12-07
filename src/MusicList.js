@@ -4,9 +4,9 @@ import axios from 'axios';
 
 export default class MusicList extends React.Component {
   state = {
-    music: [id, title, album, artist, releaseDate]
+    music: []
   }
-}
+
 
   componentDidMount() {
     axios.get(`http://www.devcodecampmusiclibrary.com/api/music`)
@@ -18,22 +18,39 @@ export default class MusicList extends React.Component {
       })
   }
 
-  render() {
-
-    if(this.state.loading == true){
-       return(<div>Loading...</div>)
-    }
-    else{
-        return(
-         <p>
-           {this.state.music.id}
-           {this.state.music.title}
-           {this.state.music.album}
-           {this.state.music.artist}
-           {this.state.music.releaseDate}
-        </p>
-    )
+  renderTableData() {
+    return this.state.music.map((music, index) => {
+       const { id, title, album, artist, releaseDate } = music;
+       return (
+          <tr key={id}>
+          {/* // <tr key={title}>
+          // <tr key={album}>
+          // <tr key={artist}>
+          // <tr key={releaseDate}> */}
+             <td key = {id+index}>{id}</td>
+             <td key = {title+index}>{title}</td>
+             <td key = {album+index}>{album}</td>
+             <td key = {artist+index}>{artist}</td>
+             <td key = {releaseDate+index}>{releaseDate}</td>
+          </tr>
+      )
+    });
   }
+  render() {
+    let musicTable = this.renderTableData();
+        return(
+         <table>
+           <thead>
+           <th>ID</th>
+           <th>Title</th>
+           <th>Album</th>
+           <th>Artist</th>
+           <th>Release Date</th>
+           </thead>
+           <tbody>
+          {musicTable}
+           </tbody>
+        </table>
+        )
 }
-
-// if (this is true) ? do this: else do this
+}
